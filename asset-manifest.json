@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/grecords_website/static/css/main.8a685450.css",
+    "main.js": "/grecords_website/static/js/main.a1e02d94.js",
+    "static/media/backgroundimg.png": "/grecords_website/static/media/backgroundimg.f0f11f86afa99a648985.png",
+    "static/media/logoWhite.png": "/grecords_website/static/media/logoWhite.9944fb7239b1c63d7a03.png",
+    "index.html": "/grecords_website/index.html",
+    "main.8a685450.css.map": "/grecords_website/static/css/main.8a685450.css.map",
+    "main.a1e02d94.js.map": "/grecords_website/static/js/main.a1e02d94.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8a685450.css",
+    "static/js/main.a1e02d94.js"
+  ]
+}
