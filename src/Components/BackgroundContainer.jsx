@@ -1,16 +1,18 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import backgroundImg from "../img/backgroundimg.png"
+import backgroundImg from "../img/backgroundimg.webp"
+import backgroundImgBlured from "../img/backgroundimgplaceholder_blured.jpg"
 import { useRef, useEffect } from "react";
 import Point from './Point';
+
 //Исходные размеры фона
-const DEFAULT_IMAGE_WIDTH=3840;
-const DEFAULT_IMAGE_HEIGHT=2160;
+const DEFAULT_IMAGE_WIDTH = 3840;
+const DEFAULT_IMAGE_HEIGHT = 2160;
 
 const BackgroundContainerElement = styled.div`
     width: 100vw;
-    height: 100vh;
-   
+    max-height: 100dvh;
+    display: flex;
     overflow-y: hidden;
     overflow-x: auto;
     -ms-overflow-style: none;  
@@ -24,13 +26,18 @@ const Background = styled.div`
     width: 100%;
     position: relative;
 `
-const BacgroundImage = styled.img`
-    height: 100%;
-    min-width: 100%;
+const BackgroundImage = styled.img`
+    top:0;
+    left:0;
+    height: 100dvh;
+    min-width: 100vw;
     object-fit: cover;
     object-position: left bottom;
-    position: relative;
-    
+    ${({ isLoading }) => isLoading ? 'visibility: hidden;' : ''}
+`
+
+export const BackgroundImagePlaceHolder = styled(BackgroundImage)`
+    filter: blur(10px);
 `
 
 //Координаты точек. ВАЖНО: начало координат в правом нижнем углу
@@ -54,36 +61,38 @@ function BackgroundContainer() {
     const [points, setPoints] = useState([]);//Состояние для точек 
     const containerRef = useRef(null);//ссылка на контейнер
     const imgRef = useRef(null);//ссылка на элемент картинки
+    const [backgroundLoading, setBackgroundLoading] = useState(true)
 
     //Изменение позиций точек при изменении размеров экрана
     useEffect(() => {
 
         const img = imgRef.current;
         const calculatePointsPosition = () => {
-            
+
             if (img.complete) {
                 const imgRect = img.getBoundingClientRect();
-                console.log(imgRect)
-              
-                const ratio=imgRect.width / DEFAULT_IMAGE_WIDTH;//коэффициент соотношения изображения на страницы и оригинального
+
+                const ratio = imgRect.width / DEFAULT_IMAGE_WIDTH;//коэффициент соотношения изображения на страницы и оригинального
 
                 const updatedPoints = pointsData.map(point => ({
-                    left: DEFAULT_IMAGE_WIDTH * point.x*ratio,
-                    bottom: DEFAULT_IMAGE_HEIGHT * point.y*ratio,
+                    left: DEFAULT_IMAGE_WIDTH * point.x * ratio,
+                    bottom: DEFAULT_IMAGE_HEIGHT * point.y * ratio,
                     name: point.name
                 }));
 
-                
+
                 setPoints(updatedPoints);
             }
         };
 
         window.addEventListener('resize', calculatePointsPosition);
+        window.addEventListener('orientationchange', calculatePointsPosition);
         img.addEventListener('load', calculatePointsPosition);
         calculatePointsPosition();
 
         return () => {
-            window.removeEventListener('resize', calculatePointsPosition)
+            window.removeEventListener('resize', calculatePointsPosition);
+            window.removeEventListener('orientationchange', calculatePointsPosition);
             img.removeEventListener('load', calculatePointsPosition);
         }
     }, [])
@@ -110,7 +119,8 @@ function BackgroundContainer() {
     return (
         <BackgroundContainerElement ref={containerRef}>
             <Background>
-                <BacgroundImage src={backgroundImg} alt="Фон" ref={imgRef} />
+                {backgroundLoading && <BackgroundImagePlaceHolder src={backgroundImgBlured} alt="background" />}
+                <BackgroundImage isLoading={backgroundLoading} src={backgroundImg} alt="Фон" ref={imgRef} onLoad={() => setBackgroundLoading(false)} />
                 {
                     points.map((point, index) => (<Point
                         key={index}
