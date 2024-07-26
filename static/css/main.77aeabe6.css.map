@@ -1,1 +1,0 @@
-{"version":3,"file":"static/css/main.77aeabe6.css","mappings":"AAAA,UAGI,QAAS,CADT,gBAAsC,CAAtC,mCAEJ","sources":["index.css"],"sourcesContent":["html,body{\r\n    min-height: 100vh;\r\n    min-height: calc(var(--vh, 1vh) * 100);\r\n    margin: 0;\r\n}"],"names":[],"sourceRoot":""}
