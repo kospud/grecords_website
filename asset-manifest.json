@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/grecords_website/static/css/main.b2b2f9e2.css",
-    "main.js": "/grecords_website/static/js/main.f1e74263.js",
+    "main.css": "/grecords_website/static/css/main.dd7c954a.css",
+    "main.js": "/grecords_website/static/js/main.8f692b7d.js",
     "static/media/backgroundimg.png": "/grecords_website/static/media/backgroundimg.f0f11f86afa99a648985.png",
     "static/media/logoWhite.png": "/grecords_website/static/media/logoWhite.9944fb7239b1c63d7a03.png",
     "static/media/backgroundimgplaceholder_blured.jpg": "/grecords_website/static/media/backgroundimgplaceholder_blured.6f026dea5ee56e9f9a2f.jpg",
     "index.html": "/grecords_website/index.html",
-    "main.b2b2f9e2.css.map": "/grecords_website/static/css/main.b2b2f9e2.css.map",
-    "main.f1e74263.js.map": "/grecords_website/static/js/main.f1e74263.js.map"
+    "main.dd7c954a.css.map": "/grecords_website/static/css/main.dd7c954a.css.map",
+    "main.8f692b7d.js.map": "/grecords_website/static/js/main.8f692b7d.js.map"
   },
   "entrypoints": [
-    "static/css/main.b2b2f9e2.css",
-    "static/js/main.f1e74263.js"
+    "static/css/main.dd7c954a.css",
+    "static/js/main.8f692b7d.js"
   ]
 }

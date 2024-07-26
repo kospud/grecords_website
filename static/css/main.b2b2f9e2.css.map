@@ -1,1 +1,0 @@
-{"version":3,"file":"static/css/main.b2b2f9e2.css","mappings":"AAAA,UACI,QACJ,CAEA,MACI,QACJ","sources":["index.css"],"sourcesContent":["html,body{\r\n    margin: 0;\r\n}\r\n\r\n:root {\r\n    --vh: 1vh;\r\n}"],"names":[],"sourceRoot":""}
