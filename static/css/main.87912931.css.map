@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/main.87912931.css","mappings":"AAAA,UAGI,qBAAuB,CACvB,4BAAgC,CAHhC,aAAc,CACd,QAGJ","sources":["index.css"],"sourcesContent":["html,body{\r\n    height: 100dvh;\r\n    margin: 0;\r\n    background-color: black;\r\n    font-family: 'Inter', sans-serif;\r\n}\r\n\r\n"],"names":[],"sourceRoot":""}
