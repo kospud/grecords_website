@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
-import logo from "../img/logoWhite.png"
+import logo from "../img/logoWhite.webp"
 import styled from 'styled-components'
 import BurgerMenu from './BurgerMenu'
 import Menu from './Menu'
 
 const Logo = styled.img`
-    width: 87px;
+    width: 4dvw;
+    min-width: 57px;
     z-index: 4;
     margin-left: 30px;
     margin-top: 24px;
@@ -29,9 +30,9 @@ function NavBar() {
         <NavBarContainer>
             <NavBarElement>
                 <Logo src={logo}/>
+                <Menu isOpen={menuIsOpen}/>
                 <BurgerMenu isOpen={menuIsOpen} setIsOpen={setMenuOpen} />
             </NavBarElement>
-            <Menu isOpen={menuIsOpen}/>
         </NavBarContainer>
     )
 }

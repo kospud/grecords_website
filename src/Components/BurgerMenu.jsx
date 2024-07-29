@@ -2,52 +2,51 @@ import React, { } from 'react'
 import styled from 'styled-components'
 
 const BurgerMenuButton = styled.div`
-width: 36px;
-height: 36px;
-z-index:4;
-margin-right: 30px;
-display: flex;
-flex-direction: column;
-justify-content: space-around;
-cursor: pointer;
-overflow: hidden;
-
-div{
-    background-color: #f0f0f0;
+  width: ${({ isOpen }) => (isOpen ? '36px' : '2vw')};
+  height: ${({ isOpen }) => (isOpen ? '36px' : '12px')}; 
+  min-width: 36px;
+  z-index: 4;
+  margin-right: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: ${({ isOpen }) => (isOpen ? 'center' : 'space-between')}; 
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  clip-path: ${({isOpen})=>(isOpen? 'inset(7px 0px 7px 0px)' : 'none')};
+  
+  div {
+    background-color: #dfdfdf;
     height: 2px;
     width: 100%;
-    transition: all 0.3s ease;
-    transform-origin: 1px 1px;
-
+    transition: transform 0.3s ease, background-color 0.1s ease;
+    z-index: 4;
+    
+    
     &:nth-child(1) {
-      transform: ${({ isOpen }) => (isOpen ? 'rotate(45deg)' : 'rotate(0)')};
+      transform: ${({ isOpen }) => (isOpen ? 'rotate(45deg) translate(0px,2px)' : 'rotate(0)')}; /* Поворот и сдвиг полоски */
     }
-
+    
     &:nth-child(2) {
-      opacity: ${({ isOpen }) => (isOpen ? '0' : '1')};
-      //transform: ${({ isOpen }) => (isOpen ? 'translateX(20px)' : 'translateX(0)')};
+      transform: ${({ isOpen }) => (isOpen ? 'rotate(-45deg) translate(0px,-2px)' : 'rotate(0)')}; /* Поворот и сдвиг полоски */
     }
-
-    &:nth-child(3) {
-      transform: ${({ isOpen }) => (isOpen ? 'rotate(-45deg)' : 'rotate(0)')};
-    }   
-}
-&:hover{
-        div{
-        background-color: #adadad;
-        }
+  }
+  
+  &:hover {
+    div {
+      background-color: #adadad;
     }
-`
+  }
+`;
 
 function BurgerMenu({ isOpen, setIsOpen }) {
 
-    return (
-        <BurgerMenuButton isOpen={isOpen} onClick={() => setIsOpen(!isOpen)}>
-            <div />
-            <div />
-            <div />
-        </BurgerMenuButton>
-    )
+  return (
+    <BurgerMenuButton isOpen={isOpen} onClick={() => setIsOpen(!isOpen)}>
+      <div />
+      <div />
+    </BurgerMenuButton>
+  )
 }
 
 export default BurgerMenu

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import backgroundImg from "../img/backgroundimg.webp"
-import backgroundImgBlured from "../img/backgroundimgplaceholder_blured.jpg"
+import backgroundImgBlured from "../img/backgroundimgplaceholder_blured.webp"
 import { useRef, useEffect } from "react";
 import Point from './Point';
 
@@ -41,7 +41,7 @@ export const BackgroundImagePlaceHolder = styled(BackgroundImage)`
 `
 
 //Координаты точек. ВАЖНО: начало координат в правом нижнем углу
-const pointsData = [
+export const pointsData = [
     { x: 0.065, y: 0.3, name: 'Комбик' },
     { x: 0.08, y: 0.7, name: 'Панель' },
     { x: 0.13, y: 0.47, name: 'Гитары' },
@@ -74,10 +74,11 @@ function BackgroundContainer() {
 
                 const ratio = imgRect.width / DEFAULT_IMAGE_WIDTH;//коэффициент соотношения изображения на страницы и оригинального
 
-                const updatedPoints = pointsData.map(point => ({
+                const updatedPoints = pointsData.map((point, index) => ({
                     left: DEFAULT_IMAGE_WIDTH * point.x * ratio,
                     bottom: DEFAULT_IMAGE_HEIGHT * point.y * ratio,
-                    name: point.name
+                    name: point.name,
+                    index: index
                 }));
 
 

@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled, { keyframes } from 'styled-components'
+import { PopupContext } from '../Providers/PopupProvider'
 
 //Анимация пульсации
 const pulse = keyframes`
@@ -52,12 +53,18 @@ const PointElement = styled.div`
 
 function Point({ point }) {
 
+    const { setIsOpen, setCurrentIndex } = useContext(PopupContext);
     return (
         <PointElement
             style={{ bottom: point.bottom, left: point.left }}
-            onClick={() => alert(`Point ${point.name} clicked`)}
+            onClick={() => PointClick()}
         />
     )
+
+    function PointClick() {
+        setIsOpen(true);
+        setCurrentIndex(point.index);
+    }
 }
 
 export default Point
