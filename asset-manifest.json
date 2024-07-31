@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/grecords_website/static/css/main.c18c1054.css",
-    "main.js": "/grecords_website/static/js/main.769e156f.js",
+    "main.js": "/grecords_website/static/js/main.de858f39.js",
     "static/media/Rectangle 13.png": "/grecords_website/static/media/Rectangle 13.14eb0f977a2d88a9bb92.png",
     "static/media/backgroundimg.webp": "/grecords_website/static/media/backgroundimg.6765c8b8c52f6ddaa07a.webp",
     "static/media/gradient.webp": "/grecords_website/static/media/gradient.656928b4f4c1e7536d27.webp",
@@ -10,10 +10,10 @@
     "index.html": "/grecords_website/index.html",
     "static/media/Scroll.webp": "/grecords_website/static/media/Scroll.fbb4a40655fd5b0d52da.webp",
     "main.c18c1054.css.map": "/grecords_website/static/css/main.c18c1054.css.map",
-    "main.769e156f.js.map": "/grecords_website/static/js/main.769e156f.js.map"
+    "main.de858f39.js.map": "/grecords_website/static/js/main.de858f39.js.map"
   },
   "entrypoints": [
     "static/css/main.c18c1054.css",
-    "static/js/main.769e156f.js"
+    "static/js/main.de858f39.js"
   ]
 }
