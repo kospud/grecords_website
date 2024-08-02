@@ -1,19 +1,26 @@
 {
   "files": {
-    "main.css": "/grecords_website/static/css/main.c18c1054.css",
-    "main.js": "/grecords_website/static/js/main.34cab709.js",
-    "static/media/Rectangle 13.png": "/grecords_website/static/media/Rectangle 13.14eb0f977a2d88a9bb92.png",
+    "main.css": "/grecords_website/static/css/main.193c34ac.css",
+    "main.js": "/grecords_website/static/js/main.071ee7a6.js",
     "static/media/backgroundimg.webp": "/grecords_website/static/media/backgroundimg.6765c8b8c52f6ddaa07a.webp",
     "static/media/gradient.webp": "/grecords_website/static/media/gradient.656928b4f4c1e7536d27.webp",
+    "static/media/Rectangle 13.webp": "/grecords_website/static/media/Rectangle 13.c7d3c3790849cd5d9bf4.webp",
     "static/media/logoWhite.webp": "/grecords_website/static/media/logoWhite.501f59a6627e41e4c100.webp",
+    "static/media/Rectangle 18.webp": "/grecords_website/static/media/Rectangle 18.0a9a63eb834674771aee.webp",
+    "static/media/Rectangle 12.webp": "/grecords_website/static/media/Rectangle 12.622c8f193a7360f725a7.webp",
+    "static/media/Rectangle 11.webp": "/grecords_website/static/media/Rectangle 11.5a183946c3b867c2b362.webp",
     "static/media/backgroundimgplaceholder_blured.webp": "/grecords_website/static/media/backgroundimgplaceholder_blured.7f89d496604624e4833e.webp",
+    "static/media/Rectangle 14.webp": "/grecords_website/static/media/Rectangle 14.24927c1a5fedae200c0a.webp",
+    "static/media/Rectangle 15.webp": "/grecords_website/static/media/Rectangle 15.f7047f47b3282a050846.webp",
+    "static/media/Rectangle 17.webp": "/grecords_website/static/media/Rectangle 17.22a6116df71d49709d9c.webp",
+    "static/media/Rectangle 16.webp": "/grecords_website/static/media/Rectangle 16.2bb61025c90cbfdf5377.webp",
     "index.html": "/grecords_website/index.html",
     "static/media/Scroll.webp": "/grecords_website/static/media/Scroll.fbb4a40655fd5b0d52da.webp",
-    "main.c18c1054.css.map": "/grecords_website/static/css/main.c18c1054.css.map",
-    "main.34cab709.js.map": "/grecords_website/static/js/main.34cab709.js.map"
+    "main.193c34ac.css.map": "/grecords_website/static/css/main.193c34ac.css.map",
+    "main.071ee7a6.js.map": "/grecords_website/static/js/main.071ee7a6.js.map"
   },
   "entrypoints": [
-    "static/css/main.c18c1054.css",
-    "static/js/main.34cab709.js"
+    "static/css/main.193c34ac.css",
+    "static/js/main.071ee7a6.js"
   ]
 }
