@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/grecords_website/static/css/main.193c34ac.css",
-    "main.js": "/grecords_website/static/js/main.4b17a3a4.js",
+    "main.css": "/grecords_website/static/css/main.d594a899.css",
+    "main.js": "/grecords_website/static/js/main.b4536f5a.js",
     "static/media/backgroundimg.webp": "/grecords_website/static/media/backgroundimg.6765c8b8c52f6ddaa07a.webp",
     "static/media/gradient.webp": "/grecords_website/static/media/gradient.656928b4f4c1e7536d27.webp",
     "static/media/Rectangle 13.webp": "/grecords_website/static/media/Rectangle 13.c7d3c3790849cd5d9bf4.webp",
@@ -16,11 +16,11 @@
     "static/media/Rectangle 16.webp": "/grecords_website/static/media/Rectangle 16.2bb61025c90cbfdf5377.webp",
     "index.html": "/grecords_website/index.html",
     "static/media/Scroll.webp": "/grecords_website/static/media/Scroll.fbb4a40655fd5b0d52da.webp",
-    "main.193c34ac.css.map": "/grecords_website/static/css/main.193c34ac.css.map",
-    "main.4b17a3a4.js.map": "/grecords_website/static/js/main.4b17a3a4.js.map"
+    "main.d594a899.css.map": "/grecords_website/static/css/main.d594a899.css.map",
+    "main.b4536f5a.js.map": "/grecords_website/static/js/main.b4536f5a.js.map"
   },
   "entrypoints": [
-    "static/css/main.193c34ac.css",
-    "static/js/main.4b17a3a4.js"
+    "static/css/main.d594a899.css",
+    "static/js/main.b4536f5a.js"
   ]
 }
