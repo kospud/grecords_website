@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import styled, { keyframes } from 'styled-components'
-import { PopupContext } from '../Providers/PopupProvider'
+import { PopupContext } from '../../Providers/PopupProvider'
 
 //Анимация пульсации
 const pulse = keyframes`
@@ -50,21 +50,34 @@ const PointElement = styled.div`
     box-shadow: inset 0 0 0 1000px #ffffff;
   }
 `
+export interface PointT {
+    left: number;
+    bottom: number;
+    name: string;
+    index: number;
+}
 
-function Point({ point }) {
+interface PointProps {
+    point: PointT;
+}
 
-    const { setIsOpen, setCurrentIndex } = useContext(PopupContext);
+function Point({ point }: PointProps) {
+
+    const { setIsOpen, setCurrentIndex, isOpen } = useContext(PopupContext)!;
     return (
         <PointElement
             style={{ bottom: point.bottom, left: point.left }}
-            onClick={() => PointClick()}
+            onClick={PointClick}
         />
     )
 
-    function PointClick() {
-        setIsOpen(true);
+    function PointClick(event: any) {
+        event.stopPropagation();
         setCurrentIndex(point.index);
+        if (!isOpen)
+            setIsOpen(true);
     }
+
 }
 
 export default Point

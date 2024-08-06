@@ -1,7 +1,9 @@
 html,body{
-    height: 100dvh;
+    max-height: 100svh;
     margin: 0;
     background-color: black;
     font-family: 'Inter', sans-serif;
+    color: white;
+    max-width: 100%;
+    overscroll-behavior-y: none;
 }
-

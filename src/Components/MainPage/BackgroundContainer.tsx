@@ -1,9 +1,13 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import backgroundImg from "../img/backgroundimg.webp"
-import backgroundImgBlured from "../img/backgroundimgplaceholder_blured.webp"
 import { useRef, useEffect } from "react";
-import Point from './Point';
+import Point, { PointT } from './Point';
+import backgroundImg from "../../img/nnstudio/backgroundimg.webp";
+import backgroundImgBlured from "../../img/nnstudio/backgroundimgplaceholder_blured.webp"
+
+/*/Адреса картинок
+const backgroundImg = "../../img/backgroundimg.webp"
+const backgroundImgBlured = "../../img/backgroundimgplaceholder_blured.webp"*/
 
 //Исходные размеры фона
 const DEFAULT_IMAGE_WIDTH = 3840;
@@ -11,7 +15,7 @@ const DEFAULT_IMAGE_HEIGHT = 2160;
 
 const BackgroundContainerElement = styled.div`
     width: 100vw;
-    max-height: 100dvh;
+    max-height: 100svh;
     display: flex;
     overflow-y: hidden;
     overflow-x: auto;
@@ -26,10 +30,14 @@ const Background = styled.div`
     width: 100%;
     position: relative;
 `
-const BackgroundImage = styled.img`
+
+interface BackgroundImageProps{
+    isLoading?: boolean
+}
+const BackgroundImage = styled.img<BackgroundImageProps>`
     top:0;
     left:0;
-    height: 100dvh;
+    height: 100svh;
     min-width: 100vw;
     object-fit: cover;
     object-position: left bottom;
@@ -38,6 +46,7 @@ const BackgroundImage = styled.img`
 
 export const BackgroundImagePlaceHolder = styled(BackgroundImage)`
     filter: blur(10px);
+    z-index: 3;
 `
 
 //Координаты точек. ВАЖНО: начало координат в правом нижнем углу
@@ -56,11 +65,12 @@ export const pointsData = [
     { x: 0.615, y: 0.06, name: 'Миска' }
 ];
 
+
 function BackgroundContainer() {
 
-    const [points, setPoints] = useState([]);//Состояние для точек 
-    const containerRef = useRef(null);//ссылка на контейнер
-    const imgRef = useRef(null);//ссылка на элемент картинки
+    const [points, setPoints] = useState<PointT[]>([]);//Состояние для точек 
+    const containerRef = useRef<HTMLDivElement>(null);//ссылка на контейнер
+    const imgRef = useRef<HTMLImageElement>(null);//ссылка на элемент картинки
     const [backgroundLoading, setBackgroundLoading] = useState(true)
 
     //Изменение позиций точек при изменении размеров экрана
@@ -69,8 +79,8 @@ function BackgroundContainer() {
         const img = imgRef.current;
         const calculatePointsPosition = () => {
 
-            if (img.complete) {
-                const imgRect = img.getBoundingClientRect();
+            if (img!.complete) {
+                const imgRect = img!.getBoundingClientRect();
 
                 const ratio = imgRect.width / DEFAULT_IMAGE_WIDTH;//коэффициент соотношения изображения на страницы и оригинального
 
@@ -88,13 +98,13 @@ function BackgroundContainer() {
 
         window.addEventListener('resize', calculatePointsPosition);
         window.addEventListener('orientationchange', calculatePointsPosition);
-        img.addEventListener('load', calculatePointsPosition);
+        img!.addEventListener('load', calculatePointsPosition);
         calculatePointsPosition();
 
         return () => {
             window.removeEventListener('resize', calculatePointsPosition);
             window.removeEventListener('orientationchange', calculatePointsPosition);
-            img.removeEventListener('load', calculatePointsPosition);
+            img!.removeEventListener('load', calculatePointsPosition);
         }
     }, [])
 
@@ -103,17 +113,17 @@ function BackgroundContainer() {
 
         const container = containerRef.current;
 
-        const scroll = (event) => {
+        const scroll = (event: any) => {
             if (event.deltaY !== 0) {
                 event.preventDefault();
-                container.scrollLeft += event.deltaY;
+                container!.scrollLeft += event.deltaY;
             }
         };
 
-        container.addEventListener("wheel", scroll);
+        container!.addEventListener("wheel", scroll);
 
         return () => {
-            container.removeEventListener("wheel", scroll);
+            container!.removeEventListener("wheel", scroll);
         }
     }, []);
 

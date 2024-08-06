@@ -1,18 +1,19 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
-import { BackGroundBlur } from './Menu';
-import { PopupContext } from '../Providers/PopupProvider';
-import { FaDesktop } from 'react-icons/fa';
+import { BackGroundBlur } from '../NavBar/Menu';
+import { PopupContext } from '../../Providers/PopupProvider';
 import { GoPlus } from "react-icons/go";
-import { MdOutlineDesktopWindows } from "react-icons/md";
 import { SlScreenDesktop } from "react-icons/sl";
 
-const PopupContainer = styled(BackGroundBlur)`
+interface PopupContainerProps{
+  isOpen: boolean;
+}
+const PopupContainer = styled(BackGroundBlur)<PopupContainerProps>`
     color: #ffffff;
     position: absolute;
-    bottom: 9dvh;
+    bottom: 9svh;
     left:0;
-    height: 82dvh;
+    height: 82svh;
     width: 41vw;
     z-index: 4;
     transform: ${({ isOpen }) => (isOpen ? 'none' : 'translateX(-50dvw)')};
@@ -21,7 +22,7 @@ const PopupContainer = styled(BackGroundBlur)`
     @media (max-width: 710px) {
       width: 97vw;
       transform: ${({ isOpen }) => (isOpen ? 'none' : 'translateX(-120dvw)')};
-      height: 100dvh;
+      height: 100svh;
       bottom:0;
     }
 
@@ -34,10 +35,10 @@ const PopupCloseButton = styled.div`
   width: 36px;
   height: 36px; 
   z-index: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center; 
-  align-items: center;
+  position: relative;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
   cursor: pointer;
   clip-path: inset(7px 0px 7px 0px);
   
@@ -45,14 +46,17 @@ const PopupCloseButton = styled.div`
     background-color: #dfdfdf;
     height: 2px;
     width: 100%;
+    position: absolute;
 
     
     &:nth-child(1) {
-      transform: rotate(45deg) translate(0px,2px);
+      top: 17px;
+      transform: rotate(45deg);
     }
     
     &:nth-child(2) {
-      transform: rotate(-45deg) translate(0px,-2px);
+      bottom: 17px;
+      transform: rotate(-45deg);
     }
   }
   
@@ -78,6 +82,11 @@ const PopupContent = styled.div`
   margin-bottom: 6%;
   z-index: 2;
 
+  @media (max-width: 600px){
+    margin-left: 6%;
+    margin-right: 7%;
+    width: 87%;
+  }
   a{
 
     font-size: 24px;
@@ -95,7 +104,7 @@ const PopupContent = styled.div`
     @media (max-width: 600px){
       font-size: 18px;
     }
-    @media (max-width: 320px){
+    @media (max-width: 360px){
         font-size: 16px;
       }
   }
@@ -103,7 +112,7 @@ const PopupContent = styled.div`
   li{
       font-size: 18px; 
 
-      @media (max-width: 1600px){
+    @media (max-width: 1600px){
         font-size: 16px;
       }
 
@@ -115,7 +124,7 @@ const PopupContent = styled.div`
       font-size: 16px;
     }
 
-    @media (max-width: 320px){
+    @media (max-width: 360px){
         font-size: 14px;
       }
   }
@@ -142,7 +151,7 @@ const PopupHeader = styled.div`
         font-size: 36px;
       }
 
-      @media (max-width: 320px){
+      @media (max-width: 360px){
         font-size: 32px;
       }
     }
@@ -198,15 +207,6 @@ div{
 }
 `
 
-const guitarsAmplifier = [
-  'Orange Micro Terror',
-  'Marshall DSL1 Head',
-  'Cort cmv15H',
-  'Orange Micro Terror MT20',
-  'Marshall DSL1 Head',
-  'Cort cmv15H',
-]
-
 const popupContentObj = {
   "-1": {
     header: 'Оборудование',
@@ -237,19 +237,57 @@ const popupContentObj = {
 
 function Popup() {
 
-  const { isOpen, setIsOpen, currentIndex } = useContext(PopupContext)
+  const { isOpen, setIsOpen, currentIndex } = useContext(PopupContext)!
+  const [startX, setStartX] = useState(0)
 
+  //Отображение контента в зависимости от нажатой точки, пока стоит заглушка
   let currentItem;
   if (currentIndex !== 0)
     currentItem = popupContentObj['-1'];
   else
-     currentItem=popupContentObj[currentIndex];
+    currentItem = popupContentObj[currentIndex];
 
+  const popupRef = useRef<HTMLDivElement>(null);
+
+  //Закрытие по свайпу
+  const handleTouchStart = (event: any) => {
+    setStartX(event.touches[0].clientX);
+  }
+
+  const handleTouchMove = (event: any) => {
+    const currentX = event.touches[0].clientX;
+    const diffX = startX - currentX;
+
+    if (diffX > 50) {
+      setIsOpen(false)
+    }
+  }
+
+  //Закрытие по клику вне области попапа
+  useEffect(() => {
+
+    const handleClick = (event: any) => {
+      const popup = popupRef!.current;
+
+      if (popup && !popup.contains(event.target)) {
+        setIsOpen(false);
+      }
+    }
+
+    if (isOpen)
+      document.addEventListener('click', handleClick);
+
+    return () => { document.removeEventListener('click', handleClick); }
+  }, [isOpen])
   return (
-    <PopupContainer isOpen={isOpen}>
+    <PopupContainer
+      isOpen={isOpen}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      ref={popupRef!}>
       <PopupContent>
         <PopupHeader>
-          <a >{currentItem.header}</a>
+          <a >{currentItem.header.toUpperCase()}</a>
           <PopupCloseButton onClick={() => setIsOpen(false)}>
             <div></div>
             <div></div>
