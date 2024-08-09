@@ -1,5 +1,6 @@
 import { BrowserRouter } from "react-router-dom";
 import AppRouter from "./Components/AppRouter";
+import Noise from "./Components/Noise";
 
 
 
@@ -9,9 +10,10 @@ import AppRouter from "./Components/AppRouter";
 function App() {
   return (
     <div classname="App" >
-        <BrowserRouter>
-          <AppRouter />
-        </BrowserRouter>
+      <Noise />
+      <BrowserRouter>
+        <AppRouter />
+      </BrowserRouter>
     </div>
   );
 }

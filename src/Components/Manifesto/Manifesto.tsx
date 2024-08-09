@@ -15,6 +15,8 @@ import rectangle17 from '../../img/manifesto/Rectangle 17.webp'
 import Footer from '../Footer'
 import parse from 'html-react-parser'
 import { PageContainer, PageTopBlock, PageContent, BigHeader, FullWidthImg, BigMotivationText, ColumnsBlock, ColumnsBlockHeader, Spacer, TwoColumnsText, OneColumnText, ImgCarousel, ImgCarouselItem, ImgWithGap, ImgCarouselTextItem } from '../PagesBlocks'
+import Gradient from '../Gradient'
+import { FadeInImage } from '../FadeInImage'
 
 
 //Текст в самом верхнем блоке страницы
@@ -44,18 +46,19 @@ function Manifesto() {
 
     const { isMobile } = useDeviceDetect();
 
-    useEffect(()=>{
+    /*useEffect(()=>{
         window.scrollTo(0,0);
-    }, [])
+    }, [])*/
     return (
         <PageContainer>
+            <Gradient/>
             <PageTopBlock src={gradientImg}>
                 <a>{parse(motivationText.toUpperCase())}</a>
                 {!isMobile && <img src={scrollImg} />}
             </PageTopBlock>
             <PageContent>
                 <BigHeader type='h1' threshold={0.5}>{parse(bigHeader.toUpperCase())}</BigHeader>
-                <FullWidthImg type='img' threshold={0.2} src={rectangle13} />
+                <FadeInImage src={rectangle13} />
                 <BigMotivationText type='a' threshold={0.4}>{parse(firstMotivationPhrase.toUpperCase())}</BigMotivationText>
                 <ColumnsBlock type='div' threshold={0.5}>
                     <ColumnsBlockHeader>{parse(firstSmallerHeader.toUpperCase())}</ColumnsBlockHeader>
@@ -105,7 +108,7 @@ function Manifesto() {
                         <a>{parse(fourthOneColumnText)}</a>
                     </OneColumnText>}
                 </ColumnsBlock>
-                <ImgWithGap type='img' src={rectangle18} threshold={0.5}></ImgWithGap>
+                <FadeInImage withGap src={rectangle18} />
                 <ImgCarousel type='div' threshold={0.5} style={{ justifyContent: isMobile ? 'flex-start' : 'flex-end' }}>
                     <ImgCarouselTextItem>
                         <a>{parse(imgItemText)}</a>

@@ -8,7 +8,7 @@ const Phrase=styled(CenterPhrase)`
 `
 function Page404() {
   return (
-    <div><Phrase isVisible={true}>
+    <div><Phrase>
         ЭТОТ РАЗДЕЛ<br/>НАХОДИТСЯ В РАЗРАБОТКЕ.
         </Phrase></div>
   )

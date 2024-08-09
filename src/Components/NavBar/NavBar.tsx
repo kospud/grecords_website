@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import BurgerMenu from './BurgerMenu'
 import Menu from './Menu'
 import logo from "../../img/logoWhite.webp";
+import { Link } from 'react-router-dom';
 
 const Logo = styled.img`
     width: 4dvw;
@@ -31,10 +32,14 @@ const NavBarElement = styled.div`
 function NavBar() {
 
     const [menuIsOpen, setMenuOpen] = useState(false)
+
+    const logoClick=()=>{
+        setMenuOpen(false)
+    }
     return (
         <NavBarContainer>
             <NavBarElement>
-                <Logo src={logo} />
+                <Link to='/' style={{zIndex: 4}} onClick={logoClick}><Logo src={logo} /></Link>
                 <Menu isOpen={menuIsOpen} setIsOpen={setMenuOpen} />
                 <BurgerMenu isOpen={menuIsOpen} setIsOpen={setMenuOpen} />
             </NavBarElement>

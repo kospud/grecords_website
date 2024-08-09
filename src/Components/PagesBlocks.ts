@@ -1,18 +1,18 @@
 import styled, { css } from "styled-components"
 import FadeInComponent from "./FadeInComponent"
-
+import { FadeInImage } from "./FadeInImage"
 //Контейнер страницы
 export const PageContainer = styled.div`
 width: 100%;
-//position: relative;
 background-color: rgba(30, 30, 30, 1);
+scroll-behavior: smooth;
 `
-interface TopBlockProps{
+interface TopBlockProps {
     src: string
 }
 //Верхний блок
 export const PageTopBlock = styled.div<TopBlockProps>`
-background-image: ${({src})=>`url(${src})`};
+//background-image: ${({ src }) => `url(${src})`};
 background-size: cover;
 background-repeat: no-repeat;
 height: 100svh;
@@ -48,7 +48,7 @@ img{
 `
 //контент
 export const PageContent = styled.div`
-//position: relative;
+position: relative;
 display: flex;
 flex-direction: column;
 align-items: center;
@@ -73,15 +73,18 @@ letter-spacing: -0.4svw;
 }
 `
 //Элемент картинки на всю ширину экрана
-export const FullWidthImg = styled(FadeInComponent)`
-object-fit: cover;
-width: 100%;
+export const FullWidthImg = styled(FadeInImage)`
+    width: 100%;
 
-@media (max-width: 600px){
-    height: 45svh;
+img{
+    //width: 100%;
     object-fit: cover;
+
+    @media (max-width: 600px){
+    height: 45svh;
     object-position: 35% 0;
     overflow: hidden;
+    }
 }
 `
 //Блок с колонками

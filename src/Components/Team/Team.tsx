@@ -14,6 +14,7 @@ import { styled } from 'styled-components';
 import TeamLine, { TeamLineProps } from './TeamLine';
 import teamMember1 from "../../img/team/teamMember1.webp"
 import TeamCard from './TeamCard';
+import Gradient from '../Gradient';
 
 const TeamBlock = styled(FadeInComponent)`
 display: flex;
@@ -151,6 +152,7 @@ function Team() {
 
     return (
         <PageContainer>
+            <Gradient/>
             <PageTopBlock src={gradient}>
                 <a>{parse(motivationText.toUpperCase())}</a>
                 {!isMobile && <img src={scrollImg} />}
@@ -170,7 +172,7 @@ function Team() {
                         <a>{parse(thirdOneColumnText)}</a>
                     </OneColumnText>
                 </ColumnsBlock>
-                {isMobile ? <FullWidthImg type='img' threshold={0.2} src={rectangle10} style={{ height: 'auto' }} />
+                {isMobile ? <FullWidthImg src={rectangle10} />
                     :
                     <ImgCarousel type='div' threshold={0.5} style={{ justifyContent: 'flex-end' }}>
                         <ImgCarouselItem style={{ width: '40%' }}>

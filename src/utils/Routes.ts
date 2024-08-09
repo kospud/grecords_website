@@ -1,11 +1,11 @@
 import Contacts from "../Components/Contacts/Contacts";
-import ContactsNN from "../Components/Contacts/ContactsNN";
+import ContactsCity from "../Components/Contacts/ContactsCity";
 import MainPage from "../Components/MainPage/MainPage";
 import Manifesto from "../Components/Manifesto/Manifesto";
 import Page404 from "../Components/Page404";
 import PrivacyPolicy from "../Components/PrivacyPolicy/PrivacyPolicy";
 import Team from "../Components/Team/Team";
-import { CONTACTS_ROUTE, MANIFESTO_ROUTE, NN_CONTACTS_ROUTE, NN_ROUTE, NULL_ROUTE, PRIVACY_POLICY_ROUTE, TEAM_ROUTE } from "./consts";
+import { CITY_CONTACTS_ROUTE, CONTACTS_ROUTE, MANIFESTO_ROUTE,  NN_ROUTE, NULL_ROUTE, PRIVACY_POLICY_ROUTE, TEAM_ROUTE } from "./consts";
 
 export const publicRoutes=[
     {
@@ -33,7 +33,7 @@ export const publicRoutes=[
         path: CONTACTS_ROUTE
     },
     {
-        component: ContactsNN,
-        path: NN_CONTACTS_ROUTE
+        component: ContactsCity,
+        path: CITY_CONTACTS_ROUTE
     }
 ]

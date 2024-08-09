@@ -2,16 +2,17 @@ import React from 'react'
 import { PageContainer, PageTopBlock } from '../PagesBlocks'
 import gradient from "../../img/contacts/custom-gradient-12-2.webp"
 import gradientMobile from "../../img/contacts/gradient.webp"
-import { Blur } from '../NavBar/Menu'
+import { Blur, MenuItem } from '../NavBar/Menu'
 import { styled } from 'styled-components'
-import { NN_CONTACTS_ROUTE } from '../../utils/consts'
 import parse from 'html-react-parser'
 import { Link } from 'react-router-dom'
 import useDeviceDetect from '../../CustomHooks/UseDeviceDetect'
+import Gradient from '../Gradient'
+import { CONTACTS_NN_ROUTE } from '../../utils/consts'
 
 const ContactsBlock=styled.div`
   ${Blur}
-  position: absolute;
+  position: relative;
   top: 50%;
   left: 50%;
   transform: translate(-50%,-50%);
@@ -39,8 +40,8 @@ const ContactsBlock=styled.div`
     font-size: 8.6svw;
     font-weight: 700;
     letter-spacing: -0.4svw;
-    
-  }
+    }
+
   }
 
   @media (max-width: 600px){
@@ -52,6 +53,9 @@ const ContactsBlock=styled.div`
   }
 `
 
+const ContactMenuItem=styled(MenuItem)`
+    opacity: 0.8;
+`
 
 const Links=[
   {
@@ -60,7 +64,7 @@ const Links=[
   },
   {
     title: 'Нижний<br/>Новгород',
-    ref: NN_CONTACTS_ROUTE
+    ref: CONTACTS_NN_ROUTE
   },
   {
     title: "Самара",
@@ -73,10 +77,11 @@ function Contacts() {
 
   return (
     <PageContainer>
+      <Gradient/>
         <PageTopBlock src={isMobile? gradientMobile : gradient}>
           <ContactsBlock>
           {
-            Links.map(({title,ref})=><Link to={ref}>{parse(title.toUpperCase())}</Link>)
+            Links.map(({title,ref})=><ContactMenuItem to={ref}>{parse(title.toUpperCase())}</ContactMenuItem>)
           }
           </ContactsBlock>
         </PageTopBlock>

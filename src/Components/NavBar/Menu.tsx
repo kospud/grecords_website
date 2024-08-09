@@ -4,8 +4,9 @@ import useDeviceDetect from '../../CustomHooks/UseDeviceDetect'
 import parse from 'html-react-parser'
 import { ACADEMY_ROUTE, BUSINES_ROUTE, CONTACTS_ROUTE, ENTHUSIATS_ROUTE, EVENTS_ROUTE, MANIFESTO_ROUTE, MOSCOW_ROUTE, NN_ROUTE, PRIVACY_POLICY_ROUTE, PROFESSIONALS_ROUTE, SAMARA_ROUTE, SHOP_ROUTE, TEAM_ROUTE } from '../../utils/consts'
 import { Link } from 'react-router-dom'
+import { AnimatePresence, motion } from 'framer-motion'
 
-export const Blur=css`
+export const Blur = css`
     overflow: hidden;
     box-shadow: inset  0px 10px 50px 10px black;
     backdrop-filter: blur(15px);
@@ -117,29 +118,32 @@ export const BottomMenuItem = styled(MenuItem)`
 export const Spacer = styled.div`
 flex-grow:1;
 `
-interface CentrePhraseProps {
-    isVisible: boolean
-}
-export const CenterPhrase = styled.a<CentrePhraseProps>`
-    position: absolute;
-    top:50%;
-    left:50%;
-    width: 56dvw;
-    height: 35svh;
-    transform:translate(-50%, -50%); 
+
+const CenterPhraseContainer = styled.div`
+position: absolute;
+width: 100%;
+height: 100%;
+pointer-events: none;
+display: flex;
+justify-content: center;
+align-items: center;
+`
+export const CenterPhrase = styled.a`
+    position: relative;
     color: white;
     font-size: 4dvw;
     z-index: 1;
-    text-align: center;
+    text-align: center; 
     white-space: nowrap;
     font-weight: 600;
-    opacity: ${({ isVisible }) => (isVisible ? '1' : '0')};
-    transition: opacity 0.2s;
+    display: block;
 
     span{
         font-style: italic;
     }
 `
+
+
 const phrases = [
     'Студия<br/>визуализируется. Скоро<br>заработаем.',//Москва
     'Студия, где все<br/>начинается.',//НН
@@ -224,8 +228,7 @@ function Menu({ isOpen, setIsOpen }: MenuProps) {
 
     const { isMobile } = useDeviceDetect();
     const [startY, setStartY] = useState(0);
-    const [currentPhraseId, setCurrentPhraseId] = useState(0)
-    const [phraseVisible, setPhraseVisible] = useState(false)
+    const [currentPhraseId, setCurrentPhraseId] = useState<number | undefined>(undefined)
     //Закрытие меню по свайпу
     const handleTouchStart = (event: any) => {
         setStartY(event.touches[0].clientY)
@@ -240,12 +243,12 @@ function Menu({ isOpen, setIsOpen }: MenuProps) {
     }
     //Отображение центральной фразы при наведении
     const handleMouseOver = (phraseId: number) => {
+
         setCurrentPhraseId(phraseId);
-        setPhraseVisible(true)
     }
 
     const handleMouseOut = () => {
-        setPhraseVisible(false)
+        setCurrentPhraseId(undefined)
     }
 
     const menuItemClick = () => {
@@ -253,7 +256,20 @@ function Menu({ isOpen, setIsOpen }: MenuProps) {
     }
     return (
         <MenuContainer isOpen={isOpen} onTouchStart={handleTouchStart} onTouchMove={handleTouchMove}>
-            {!isMobile && <CenterPhrase isVisible={phraseVisible}>{parse(phrases[currentPhraseId].toUpperCase())}</CenterPhrase>}
+            {!isMobile && <CenterPhraseContainer>
+                <AnimatePresence mode="wait">
+                    <motion.div
+                        key={currentPhraseId}
+                        initial={{ y: 10, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        exit={{ y: -10, opacity: 0 }}
+                        transition={{ duration: 0.2 }}>
+                        {
+                            currentPhraseId !== undefined && <CenterPhrase>{parse(phrases[currentPhraseId].toUpperCase())}</CenterPhrase>
+                        }
+                    </motion.div>
+                </AnimatePresence>
+            </CenterPhraseContainer>}
             <TopMenu>
                 {
                     isMobile ?
