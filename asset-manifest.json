@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/grecords_website/static/css/main.ff8c3653.css",
-    "main.js": "/grecords_website/static/js/main.79e18853.js",
+    "main.css": "/grecords_website/static/css/main.cc00960c.css",
+    "main.js": "/grecords_website/static/js/main.1bb2a420.js",
     "static/media/custom-gradient-12-2.webp": "/grecords_website/static/media/custom-gradient-12-2.3f5d79ff80037f179099.webp",
     "static/media/backgroundimg.webp": "/grecords_website/static/media/backgroundimg.6765c8b8c52f6ddaa07a.webp",
     "static/media/gradient.webp": "/grecords_website/static/media/gradient.656928b4f4c1e7536d27.webp",
@@ -18,13 +18,17 @@
     "static/media/Rectangle 15.webp": "/grecords_website/static/media/Rectangle 15.f7047f47b3282a050846.webp",
     "static/media/Rectangle 17.webp": "/grecords_website/static/media/Rectangle 17.22a6116df71d49709d9c.webp",
     "static/media/Rectangle 16.webp": "/grecords_website/static/media/Rectangle 16.2bb61025c90cbfdf5377.webp",
+    "static/media/slick.svg": "/grecords_website/static/media/slick.2630a3e3eab21c607e21.svg",
+    "static/media/slick.eot": "/grecords_website/static/media/slick.a4e97f5a2a64f0ab1323.eot",
+    "static/media/slick.ttf": "/grecords_website/static/media/slick.c94f7671dcc99dce43e2.ttf",
+    "static/media/slick.woff": "/grecords_website/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/grecords_website/index.html",
     "static/media/Scroll.webp": "/grecords_website/static/media/Scroll.fbb4a40655fd5b0d52da.webp",
-    "main.ff8c3653.css.map": "/grecords_website/static/css/main.ff8c3653.css.map",
-    "main.79e18853.js.map": "/grecords_website/static/js/main.79e18853.js.map"
+    "main.cc00960c.css.map": "/grecords_website/static/css/main.cc00960c.css.map",
+    "main.1bb2a420.js.map": "/grecords_website/static/js/main.1bb2a420.js.map"
   },
   "entrypoints": [
-    "static/css/main.ff8c3653.css",
-    "static/js/main.79e18853.js"
+    "static/css/main.cc00960c.css",
+    "static/js/main.1bb2a420.js"
   ]
 }
