@@ -1,12 +1,29 @@
 import styled, { css } from "styled-components"
 import FadeInComponent from "./FadeInComponent"
 import { FadeInImage } from "./FadeInImage"
+import { PropsWithChildren, useContext } from "react"
+import { PageScrollContainer } from "./PageSmoothScrollContainer"
+import NavBar from "./NavBar/NavBar"
+import { GradientContext } from "../Providers/GradientProvider"
 //Контейнер страницы
-export const PageContainer = styled.div`
+export const PageContainerElement = styled.div`
 width: 100%;
-background-color: rgba(30, 30, 30, 1);
-scroll-behavior: smooth;
+//background-color: rgba(30, 30, 30, 1);
+overflow: hidden;
+position: relative;
 `
+
+export const PageContainer = ({ children }: PropsWithChildren) => {
+    
+    const {isVisible} =useContext(GradientContext)!
+    
+    return <PageScrollContainer>
+        <PageContainerElement style={{backgroundColor: isVisible? undefined : 'rgba(30, 30, 30, 1)' }}>
+            <NavBar/>
+            {children}
+        </PageContainerElement>
+    </PageScrollContainer>
+}
 interface TopBlockProps {
     src: string
 }
@@ -225,7 +242,7 @@ display: flex;
 width: 95%;
 overflow-x: auto;
 margin-bottom: 7.4svh;
-
+justify-content: space-between;
 @media (max-width: 600px){
     width: 100%;
 }
@@ -234,6 +251,8 @@ margin-bottom: 7.4svh;
 export const ImgCarouselItem = styled.div`
 width: 20%;
 flex-shrink: 0;
+//justify-content: flex-end;
+//display: flex;
     img{
         width: 94%;
         object-fit: cover;

@@ -80,7 +80,11 @@ export const MenuItem = styled(Link)`
     color: #ffffff;
     font-weight: 400;
     opacity: 0.5;
+    font-size: 24px;
+
+    @media (max-width: 2048px) {
     font-size: 20px;
+    }
 
     @media (max-width: 1400px) {
     font-size: 16px;
@@ -127,17 +131,17 @@ pointer-events: none;
 display: flex;
 justify-content: center;
 align-items: center;
+z-index: 1;
 `
 export const CenterPhrase = styled.a`
     position: relative;
     color: white;
     font-size: 4dvw;
-    z-index: 1;
     text-align: center; 
     white-space: nowrap;
     font-weight: 600;
     display: block;
-
+    
     span{
         font-style: italic;
     }
@@ -273,15 +277,16 @@ function Menu({ isOpen, setIsOpen }: MenuProps) {
             <TopMenu>
                 {
                     isMobile ?
-                        menuItemsMobile.map(item => <MenuBlock>
+                        menuItemsMobile.map((item, index) => <MenuBlock key={index+100}>
                             {
-                                item.items.map(menuItem => <MenuItem to={menuItem.href} onClick={menuItemClick}>{parse(menuItem.title.toUpperCase())}</MenuItem>)
+                                item.items.map((menuItem,index) => <MenuItem key={index} to={menuItem.href} onClick={menuItemClick}>{parse(menuItem.title.toUpperCase())}</MenuItem>)
                             }
                         </MenuBlock>)
                         :
-                        menuItemsDeskTop.map(item => <MenuBlock>
+                        menuItemsDeskTop.map((item, index) => <MenuBlock key={index+1000}>
                             {
-                                item.top.map(topElem => <MenuItem
+                                item.top.map(topElem=> <MenuItem
+                                    key={topElem.phraseId}
                                     onClick={menuItemClick}
                                     onMouseOver={() => handleMouseOver(topElem.phraseId)}
                                     onMouseOut={handleMouseOut}
@@ -291,6 +296,7 @@ function Menu({ isOpen, setIsOpen }: MenuProps) {
                                 </MenuItem>)}
                             <Spacer />
                             {item.bottom && <BottomMenuItem
+                                key={item.bottom.phraseId}
                                 onClick={menuItemClick}
                                 onMouseOver={() => handleMouseOver(item.bottom.phraseId)}
                                 onMouseOut={handleMouseOut}

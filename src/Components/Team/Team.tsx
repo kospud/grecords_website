@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { BigHeader, BigMotivationText, ColumnsBlock, ColumnsBlockHeader, FullWidthImg, ImgCarousel, ImgCarouselItem, OneColumnText, PageContainer, PageContent, PageTopBlock, Spacer, TwoColumnsText } from '../PagesBlocks';
 import gradient from "../../img/team/gradient.webp"
 import parse from "html-react-parser"
@@ -9,29 +9,12 @@ import rectangle10 from '../../img/team/Rectangle 10.webp'
 import rectangle11 from '../../img/team/Rectangle 11.webp'
 import rectangle12 from '../../img/team/Rectangle 12.webp'
 import rectangle13 from '../../img/team/Rectangle 13.webp'
-import FadeInComponent from '../FadeInComponent';
 import { styled } from 'styled-components';
-import TeamLine, { TeamLineProps } from './TeamLine';
-import teamMember1 from "../../img/team/teamMember1.webp"
-import TeamCard from './TeamCard';
 import Gradient from '../Gradient';
-
-const TeamBlock = styled(FadeInComponent)`
-display: flex;
-flex-direction: column;
-width: 75%;
-margin-left: 17svw;
-margin-top: 7.5svh;
-margin-bottom: 9svh;
-border-bottom: solid white 3px;
-
-@media (max-width: 600px){
-    width: 94%;
-    margin-left: 0;
-    margin-top: 5svh;
-    margin-bottom: 5svh;
-}
-`
+import Preloader from '../Preloader';
+import TeamReviewsCarousel from './TeamReviewsCarousel';
+import TeamBlock from './TeamBlock';
+import { GradientContext } from '../../Providers/GradientProvider';
 
 const TeamBlockHeader = styled(ColumnsBlockHeader)`
 @media (max-width: 600px){
@@ -39,27 +22,11 @@ const TeamBlockHeader = styled(ColumnsBlockHeader)`
 }
 `
 
-const TeamReviewsCarousel = styled(FadeInComponent)`
-display: flex;
-    width: 97.5%;
-    justify-content: space-between;
-    overflow-x: auto;
-    margin-left: 2.5%;
-    margin-bottom: 16svh;
-    margin-top: 15svh;
-
-    @media(max-width: 600px){
-        margin-bottom: 9svh;
-        margin-top: 7svh;
-        margin-left: 5%;
-        width: 95%;
-    }
-`
 
 //#region контент на странице
 const motivationText = 'Тут нужен какой-то мотивирующий текст примерно в три строчки. Или четыре. возможно пять? Или нет?'
 const bigHeader = 'С чего<br/>все<br/>Началось?'
-const bigHeaderMobile='С чего все<br/>началось?'
+const bigHeaderMobile = 'С чего все<br/>началось?'
 const firstOneColumnText = 'Мы всей душой верим в то, что человек создан для того, чтобы творить. Мы все обладаем безграничными возможностями и потенциалом создавать свою жизнь в соответствии с нашими желаниями и увлечениями. Нашей единственной и неизменной миссией является создание условий для раскрытия этого потенциала.Мы всей душой верим в то, что человек создан для того, чтобы творить. Мы все обладаем безграничными возможностями и потенциалом со.'
 const secondOneColumnText = 'Мы всей душой верим в то, что человек создан для того, чтобы творить. Мы все обладаем безграничными возможностями и потенциалом создавать свою жизнь в соответствии с нашими желаниями и увлечениями. Нашей единственной и неизменной миссией является создание условий для раскрытия этого потенциала.'
 const thirdOneColumnText = 'Мы всей душой верим в то, что человек создан для того, чтобы творить. Мы все обладаем безграничными возможностями и потенциалом создавать свою жизнь в соответствии с нашими желаниями и увлечениями. Нашей единственной и неизменной миссией является создание условий для раскрытия этого потенциала. Мы всей душой верим в то, что человек создан для того, чтобы творить. Мы все обладаем безграничными возможностями и потенциалом создавать свою жизнь в соответствии с нашими желаниями и увлечениями. '
@@ -80,85 +47,57 @@ const ninthOneColumnTextMobile = 'в соответствии с нашими ж
 const secondBigMotivationText = 'Тут нужен какой-то мотивирующий текст примерно в три строчки. или не три? '
 const imgCarousel1 = [rectangle11, rectangle12, rectangle13]
 const thirthBigHeader = 'Нас<br/>Выбирают'
-const teamMembers = [
-    {
-        teamMemberName: 'Александр Мазур',
-        teamMemberRole: 'Основатель',
-        teamMemberPhoto: teamMember1
-    },
-    {
-        teamMemberName: 'Александр Мазур',
-        teamMemberRole: 'Основатель',
-        teamMemberPhoto: teamMember1
-    },
-    {
-        teamMemberName: 'Александр Мазур',
-        teamMemberRole: 'Основатель',
-        teamMemberPhoto: teamMember1
-    },
-    {
-        teamMemberName: 'Александр Мазур',
-        teamMemberRole: 'Основатель',
-        teamMemberPhoto: teamMember1
-    },
-    {
-        teamMemberName: 'Александр Мазур',
-        teamMemberRole: 'Основатель',
-        teamMemberPhoto: teamMember1
-    },
 
-]
-const TeamReviews = [
-    {
-        teamName: 'Название Команды',
-        photo: '',
-        text: 'Здесь могут быть отзывы, но надо смотреть сколько влезет текста'
-    },
-    {
-        teamName: 'Название Команды',
-        photo: '',
-        text: 'Здесь могут быть отзывы, но надо смотреть сколько влезет текста'
-    },
-    {
-        teamName: 'Название Команды',
-        photo: '',
-        text: 'Здесь могут быть отзывы, но надо смотреть сколько влезет текста'
-    },
-    {
-        teamName: 'Название Команды',
-        photo: '',
-        text: 'Здесь могут быть отзывы, но надо смотреть сколько влезет текста'
-    },
-    {
-        teamName: 'Название Команды',
-        photo: '',
-        text: 'Здесь могут быть отзывы, но надо смотреть сколько влезет текста'
-    },
-    {
-        teamName: 'Название Команды',
-        photo: '',
-        text: 'Здесь могут быть отзывы, но надо смотреть сколько влезет текста'
-    },
-]
+//все изображения на странице 
+const imagesOnPage = [rectangle10, ...imgCarousel1]
 //#endregion
+
+
+export const loadImage = (src: string) => {
+    return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.src = src;
+        img.onload = () => resolve(src);
+        img.onerror = () => reject(new Error(`Failed to load image: ${src}`));
+    });
+};
+
 function Team() {
 
     const { isMobile } = useDeviceDetect();
+    const [isLoading, setIsLoading] = useState(true)
 
-
-    useEffect(()=>{
-        window.scrollTo(0,0);
+    const {setVisibility}=useContext(GradientContext)!
+    useEffect(() => {
+        window.scrollTo(0, 0);
     }, [])
 
+    useEffect(() => {
+        const LoadAllImages = async () => {
+            
+                const imagePromises=imagesOnPage.map(url=>loadImage(url))
+
+                await Promise.all(imagePromises)
+                setIsLoading(false)
+        }
+
+        LoadAllImages();
+
+        setVisibility(true)
+
+        return ()=>{
+            setVisibility(false)
+        }
+    }, [])
     return (
         <PageContainer>
-            <Gradient/>
+            <Preloader isLoading={isLoading} />
             <PageTopBlock src={gradient}>
                 <a>{parse(motivationText.toUpperCase())}</a>
                 {!isMobile && <img src={scrollImg} />}
             </PageTopBlock>
             <PageContent>
-                <BigHeader style={{ marginTop: '8svh', marginBottom: '2.7svh' }} type='h1' threshold={0.2}>{parse(isMobile? bigHeaderMobile.toUpperCase() : bigHeader.toUpperCase())}</BigHeader>
+                <BigHeader style={{ marginTop: '8svh', marginBottom: '2.7svh' }} type='h1' threshold={0.2}>{parse(isMobile ? bigHeaderMobile.toUpperCase() : bigHeader.toUpperCase())}</BigHeader>
                 <ColumnsBlock type='div' threshold={0.5}>
                     <TeamBlockHeader>2010</TeamBlockHeader>
                     {isMobile && <Spacer />}
@@ -210,16 +149,7 @@ function Team() {
                     </OneColumnText>
                 </ColumnsBlock>
                 <BigHeader style={{ marginTop: '8svh', marginBottom: '2.7svh' }} type='h1' threshold={0.2}>{parse(secondBigHeder.toUpperCase())}</BigHeader>
-                <TeamBlock type='div' threshold={0.5}>
-                    {
-                        teamMembers.map((member, index) => <TeamLine
-                            teamMemberName={member.teamMemberName}
-                            teamMemberRole={member.teamMemberRole}
-                            teamMemberPhoto={member.teamMemberPhoto}
-                            photoRotate={index % 2 == 0}
-                        />)
-                    }
-                </TeamBlock>
+                <TeamBlock />
                 <ColumnsBlock type='div' threshold={0.5}>
                     <TeamBlockHeader>{parse(fourthColumnBlockHeader.toUpperCase())}</TeamBlockHeader>
                     {isMobile && <Spacer />}
@@ -236,12 +166,8 @@ function Team() {
                     </OneColumnText>
                 </ColumnsBlock>
                 <BigMotivationText type='a' threshold={0.5}>{parse(secondBigMotivationText.toUpperCase())}</BigMotivationText>
-                <BigHeader type='h1' threshold={0.5} style={{marginTop: isMobile? '5.7svh' : '19svh'}}>{parse(thirthBigHeader.toUpperCase())}</BigHeader>
-                <TeamReviewsCarousel type='div' threshold={0.5}>
-                    {
-                        TeamReviews.map(rev => <TeamCard />)
-                    }
-                </TeamReviewsCarousel>
+                <BigHeader type='h1' threshold={0.5} style={{ marginTop: isMobile ? '5.7svh' : '19svh' }}>{parse(thirthBigHeader.toUpperCase())}</BigHeader>
+                <TeamReviewsCarousel />
             </PageContent>
             <Footer />
         </PageContainer>

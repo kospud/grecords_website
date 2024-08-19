@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
+import { GradientContext } from '../Providers/GradientProvider'
 
 
 const GradientContaner = styled.div`
@@ -99,7 +100,7 @@ position: absolute;
         animation: move4 10s linear infinite;
         overflow: visible;
         z-index: 1;
-        will-change: transform;
+        
     }
 
     @keyframes move4{
@@ -142,7 +143,6 @@ const Gradient3 = styled.div`
             background: radial-gradient(circle, rgba(239, 11, 27, 1) 0%, rgba(247,0,0,0) 50%);
             animation: move6 10s linear infinite;
             overflow: visible;
-            will-change: transform;
             
         }
 
@@ -159,8 +159,10 @@ const Gradient3 = styled.div`
     }
 `
 function Gradient() {
-    return (
-        <GradientContaner>
+
+    const {isVisible}=useContext(GradientContext)!
+
+    return isVisible && <GradientContaner>
             <Gradient1>
                 <Gradient2>
                     <Gradient3>
@@ -169,7 +171,7 @@ function Gradient() {
                 </Gradient2>
             </Gradient1>
         </GradientContaner>
-    )
+    
 }
 
 export default Gradient

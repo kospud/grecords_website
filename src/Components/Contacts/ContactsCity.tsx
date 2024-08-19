@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { ColumnsBlockHeader, PageContainer, } from '../PagesBlocks'
+import React, { useContext, useEffect, useRef, useState } from 'react'
+import { ColumnsBlockHeader, PageContainer } from '../PagesBlocks'
 import styled from 'styled-components'
 import useDeviceDetect from '../../CustomHooks/UseDeviceDetect'
 import gradient from "../../img/contacts/custom-gradient-12-2.webp"
@@ -11,6 +11,7 @@ import { SocialMedia, socialMedia } from '../Footer'
 import { Map as MapType } from 'yandex-maps'
 import { Link, useParams } from 'react-router-dom'
 import Gradient from '../Gradient'
+import { GradientContext } from '../../Providers/GradientProvider'
 
 const ContactsPageBlock = styled.div`
     background-size: cover;
@@ -248,6 +249,17 @@ function ContactsCity() {
     const [mapIsLoad, setMapLoad] = useState(false)
     const { city } = useParams<string>();
 
+    const { setVisibility } = useContext(GradientContext)!
+
+    useEffect(() => {
+
+        setVisibility(true)
+
+        return () => {
+            setVisibility(false)
+        }
+    }, [])
+
     //Убираем зум по скроллу с карты
     useEffect(() => {
 
@@ -257,22 +269,21 @@ function ContactsCity() {
         }
     }, [mapIsLoad])
 
-    if(!city){
+    if (!city) {
         return;
     }
 
-    const cityContacts=CityContacts[city as keyof typeof CityContacts];
+    const cityContacts = CityContacts[city as keyof typeof CityContacts];
 
     const subMenu = subMenuItems.map(item => <SubMenuBlock>
         {
             item.map(({ title, ref }) => <SubMenuItem to={ref}>{parse(title.toUpperCase())}</SubMenuItem>)
         }
     </SubMenuBlock>)
-    
+
     return (
         <YMaps>
             <PageContainer>
-                <Gradient />
                 <ContactsPageBlock>
                     <PageHeader>{parse(cityContacts.title.toUpperCase())}</PageHeader>
                     <ContactsContent>

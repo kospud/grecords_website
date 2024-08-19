@@ -2,9 +2,10 @@ import React from 'react'
 import { styled } from 'styled-components'
 
 const TeamCardElement = styled.div`
-    width: 19%;
+    width: 100%;
     flex-shrink: 0;
-
+    display: flex;
+    flex-direction: column;
     @media (max-width: 600px){
         min-width: 296px;
     }
@@ -19,6 +20,7 @@ flex-direction: column;
 justify-content: space-between;
 align-items: center;
 color: black;
+align-self: center;
 `
 
 const TeamPhoto = styled.img`
@@ -67,13 +69,20 @@ margin-bottom: 2.5svh;
 }
 `
 
-function TeamCard() {
+interface teamCardProps{
+    review: {
+        teamName: string,
+        photo: string,
+        text: string
+    },
+}
+function TeamCard({review}: teamCardProps) {
     return (
         <TeamCardElement>
             <TeamCardContent>
-                <TeamPhoto alt='Картинка'/>
-                <TeamName>НАЗВАНИЕ КОМАНДЫ</TeamName>
-                <TeamReview>Здесь могут быть отзывы, но надо смотреть сколько влезет текста</TeamReview>
+                <TeamPhoto src={review.photo} alt='Картинка'/>
+                <TeamName>{review.teamName.toUpperCase()}</TeamName>
+                <TeamReview>{review.text}</TeamReview>
             </TeamCardContent>
         </TeamCardElement>
     )

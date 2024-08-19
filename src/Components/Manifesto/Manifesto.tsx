@@ -1,9 +1,7 @@
-import React, { useEffect } from 'react'
-import styled, { css } from 'styled-components'
+import React, { useContext, useEffect, useState } from 'react'
 import gradientImg from "../../img/manifesto/gradient.webp"
 import scrollImg from "../../img/Scroll.webp"
 import useDeviceDetect from '../../CustomHooks/UseDeviceDetect'
-import FadeInComponent from '../FadeInComponent'
 import rectangle13 from '../../img/manifesto/Rectangle 13.webp'
 import rectangle16 from '../../img/manifesto/Rectangle 16.webp'
 import rectangle11 from '../../img/manifesto/Rectangle 11.webp'
@@ -14,9 +12,15 @@ import rectangle15 from '../../img/manifesto/Rectangle 15.webp'
 import rectangle17 from '../../img/manifesto/Rectangle 17.webp'
 import Footer from '../Footer'
 import parse from 'html-react-parser'
-import { PageContainer, PageTopBlock, PageContent, BigHeader, FullWidthImg, BigMotivationText, ColumnsBlock, ColumnsBlockHeader, Spacer, TwoColumnsText, OneColumnText, ImgCarousel, ImgCarouselItem, ImgWithGap, ImgCarouselTextItem } from '../PagesBlocks'
+import { PageContainer, PageTopBlock, PageContent, BigHeader, 
+    BigMotivationText, ColumnsBlock, ColumnsBlockHeader, Spacer, 
+    TwoColumnsText, OneColumnText, ImgCarousel, ImgCarouselItem, ImgCarouselTextItem } from '../PagesBlocks'
 import Gradient from '../Gradient'
 import { FadeInImage } from '../FadeInImage'
+import Preloader from '../Preloader'
+import { loadImage } from '../Team/Team'
+import { PageScrollContainer } from '../PageSmoothScrollContainer'
+import { GradientContext } from '../../Providers/GradientProvider'
 
 
 //Текст в самом верхнем блоке страницы
@@ -42,16 +46,54 @@ const fourthOneColumnText='Мы всей душой верим в то, что �
 
 const imgItemText='Мы всей душой верим в то, что человек создан для того, чтобы творить. Мы все обладаем безграничными возможностями и потенциалом создавать свою жизнь в соответствии с нашими желаниями и увлечениями. Нашей единственной и неизменной миссией является создание условий для раскрытия этого потенциала.Мы всей душой верим в то, что человек создан для того, чтобы творить. Мы все обладаем безграничными возможностями и потенциалом со.'
 
+const imagesOnPage=[
+rectangle13, 
+rectangle16,
+rectangle11,
+rectangle12,
+rectangle14,
+rectangle18,
+rectangle15,
+rectangle17
+]
 function Manifesto() {
 
     const { isMobile } = useDeviceDetect();
+    const [isLoading, setIsLoading]=useState(true)
+    const {setVisibility}=useContext(GradientContext)!
+    useEffect(()=>{
+        const contentIsLoaded=()=>{
+            setIsLoading(false)
+        }
+
+        window.addEventListener('load', contentIsLoaded)
+
+        setVisibility(true)
+        return ()=>{
+            window.removeEventListener('load', contentIsLoaded)
+            setVisibility(false)
+        }
+    },[])
 
     /*useEffect(()=>{
         window.scrollTo(0,0);
     }, [])*/
+
+
+    useEffect(()=>{
+        const LoadAllImages = async () => {
+            
+            const imagePromises=imagesOnPage.map(url=>loadImage(url))
+
+            await Promise.all(imagePromises)
+            setIsLoading(false)
+    }
+
+    LoadAllImages();
+    }, [])
     return (
         <PageContainer>
-            <Gradient/>
+            <Preloader isLoading={isLoading}/>
             <PageTopBlock src={gradientImg}>
                 <a>{parse(motivationText.toUpperCase())}</a>
                 {!isMobile && <img src={scrollImg} />}

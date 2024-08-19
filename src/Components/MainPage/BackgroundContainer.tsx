@@ -46,7 +46,7 @@ const BackgroundImage = styled.img<BackgroundImageProps>`
 
 export const BackgroundImagePlaceHolder = styled(BackgroundImage)`
     filter: blur(10px);
-    z-index: 3;
+    z-index: 4;
 `
 
 //Координаты точек. ВАЖНО: начало координат в правом нижнем углу

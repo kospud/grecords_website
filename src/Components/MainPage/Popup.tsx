@@ -89,8 +89,12 @@ const PopupContent = styled.div`
   }
   a{
 
-    font-size: 24px;
+    font-size: 30px;
     font-weight: 300;
+
+    @media (max-width: 2048px){
+        font-size: 24px;
+      }
 
     @media (max-width: 1600px){
         font-size: 18px;
@@ -110,7 +114,11 @@ const PopupContent = styled.div`
   }
 
   li{
-      font-size: 18px; 
+      font-size: 25px; 
+
+      @media (max-width: 2048px){
+        font-size: 18px;
+      }
 
     @media (max-width: 1600px){
         font-size: 16px;
@@ -136,8 +144,12 @@ const PopupHeader = styled.div`
     flex-grow: 0;
     a{
       
-      font-size: 64px;
+      font-size: 76px;
       font-weight: 600;
+
+      @media (max-width: 2048px){
+        font-size: 64px;
+      }
 
       @media (max-width: 1600px){
         font-size: 48px;
@@ -158,12 +170,17 @@ const PopupHeader = styled.div`
 `
 
 const PopupBody = styled.div`
-    width: 67%;
+    width: 80%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     flex-grow:1;
     margin-top: 7%;
+
+    @media (max-width: 2048px){
+      width: 67%;
+    }
+
     @media (max-width: 1000px){
       width: 100%
     }
@@ -183,7 +200,12 @@ const PopupFooter = styled.div`
 
 display: flex;
 flex-direction: column;
-width: 67%;
+width: 80%;
+
+@media (max-width: 2048px){
+      width: 67%;
+    }
+    
 @media (max-width: 1000px){
       width: 100%
     }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import { PageContainer, PageTopBlock } from '../PagesBlocks'
 import gradient from "../../img/contacts/custom-gradient-12-2.webp"
 import gradientMobile from "../../img/contacts/gradient.webp"
@@ -9,9 +9,14 @@ import { Link } from 'react-router-dom'
 import useDeviceDetect from '../../CustomHooks/UseDeviceDetect'
 import Gradient from '../Gradient'
 import { CONTACTS_NN_ROUTE } from '../../utils/consts'
+import { GradientContext } from '../../Providers/GradientProvider'
 
 const ContactsBlock=styled.div`
   ${Blur}
+
+  box-shadow: none;
+  filter: none; 
+  -webkit-filter: none; 
   position: relative;
   top: 50%;
   left: 50%;
@@ -75,9 +80,18 @@ function Contacts() {
 
   const {isMobile}=useDeviceDetect();
 
+  const {setVisibility}=useContext(GradientContext)!
+
+  useEffect(()=>{
+
+    setVisibility(true)
+
+        return ()=>{
+            setVisibility(false)
+        }
+  },[])
   return (
     <PageContainer>
-      <Gradient/>
         <PageTopBlock src={isMobile? gradientMobile : gradient}>
           <ContactsBlock>
           {

@@ -1,3 +1,4 @@
+import React from "react";
 import Contacts from "../Components/Contacts/Contacts";
 import ContactsCity from "../Components/Contacts/ContactsCity";
 import MainPage from "../Components/MainPage/MainPage";
@@ -13,27 +14,27 @@ export const publicRoutes=[
         path: NULL_ROUTE
     },
     {
-        component: MainPage,
+        component: React.lazy(()=>import("../Components/MainPage/MainPage")),
         path: NN_ROUTE
     },
     {
-        component: Manifesto,
+        component: React.lazy(()=>import("../Components/Manifesto/Manifesto")),
         path: MANIFESTO_ROUTE
     },
     {
-        component: Team,
+        component: React.lazy(()=>import("../Components/Team/Team")),
         path: TEAM_ROUTE
     },
     {
-        component: PrivacyPolicy,
+        component: React.lazy(()=>import("../Components/PrivacyPolicy/PrivacyPolicy")),
         path: PRIVACY_POLICY_ROUTE
     },
     {
-        component: Contacts,
+        component: React.lazy(()=>import("../Components/Contacts/Contacts")),
         path: CONTACTS_ROUTE
     },
     {
-        component: ContactsCity,
+        component: React.lazy(()=>import("../Components/Contacts/ContactsCity")),
         path: CITY_CONTACTS_ROUTE
     }
 ]
